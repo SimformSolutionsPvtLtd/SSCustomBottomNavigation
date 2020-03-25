@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SSCustomBottomNavigation</string>
+    <string name="main_page_selected">%s page is selected</string>
+</resources>
