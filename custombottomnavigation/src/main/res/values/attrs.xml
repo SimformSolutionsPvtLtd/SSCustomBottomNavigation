@@ -13,16 +13,19 @@
         <attr name="icon_imageview_fitImage" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="MeowBottomNavigation">
-        <attr name="mbn_defaultIconColor" format="color" />
-        <attr name="mbn_selectedIconColor" format="color" />
-        <attr name="mbn_backgroundBottomColor" format="color" />
-        <attr name="mbn_circleColor" format="color" />
-        <attr name="mbn_countTextColor" format="color" />
-        <attr name="mbn_countBackgroundColor" format="color" />
-        <attr name="mbn_countTypeface" format="string" />
-        <attr name="mbn_rippleColor" format="color" />
-        <attr name="mbn_shadowColor" format="color" />
+    <declare-styleable name="SSCustomBottomNavigation">
+        <attr name="ss_defaultIconColor" format="color" />
+        <attr name="ss_selectedIconColor" format="color" />
+        <attr name="ss_iconTextTypeface" format="string" />
+        <attr name="ss_iconTextColor" format="color" />
+        <attr name="ss_iconTextSize" format="dimension" />
+        <attr name="ss_backgroundBottomColor" format="color" />
+        <attr name="ss_circleColor" format="color" />
+        <attr name="ss_countTextColor" format="color" />
+        <attr name="ss_countBackgroundColor" format="color" />
+        <attr name="ss_countTypeface" format="string" />
+        <attr name="ss_rippleColor" format="color" />
+        <attr name="ss_shadowColor" format="color" />
     </declare-styleable>
 
 </resources>

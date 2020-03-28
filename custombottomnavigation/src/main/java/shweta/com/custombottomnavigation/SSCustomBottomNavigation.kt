@@ -70,6 +70,25 @@ class SSCustomBottomNavigation : FrameLayout {
             field = value
             updateAllIfAllowDraw()
         }
+
+    var iconTextColor = Color.parseColor("#003F87")
+        set(value) {
+            field = value
+            updateAllIfAllowDraw()
+        }
+
+    var iconTextTypeface: Typeface? = null
+        set(value) {
+            field = value
+            updateAllIfAllowDraw()
+        }
+
+    var iconTextSize = 10f
+        set(value) {
+            field = value
+            updateAllIfAllowDraw()
+        }
+
     private var rippleColor = Color.parseColor("#757575")
 
     private var allowDraw = false
@@ -97,21 +116,26 @@ class SSCustomBottomNavigation : FrameLayout {
     }
 
     private fun setAttributeFromXml(context: Context, attrs: AttributeSet) {
-        val a = context.theme.obtainStyledAttributes(attrs, R.styleable.MeowBottomNavigation, 0, 0)
+        val a = context.theme.obtainStyledAttributes(attrs, R.styleable.SSCustomBottomNavigation, 0, 0)
         try {
             a.apply {
-                defaultIconColor = getColor(R.styleable.MeowBottomNavigation_mbn_defaultIconColor, defaultIconColor)
-                selectedIconColor = getColor(R.styleable.MeowBottomNavigation_mbn_selectedIconColor, selectedIconColor)
-                backgroundBottomColor = getColor(R.styleable.MeowBottomNavigation_mbn_backgroundBottomColor, backgroundBottomColor)
-                circleColor = getColor(R.styleable.MeowBottomNavigation_mbn_circleColor, circleColor)
-                countTextColor = getColor(R.styleable.MeowBottomNavigation_mbn_countTextColor, countTextColor)
-                countBackgroundColor = getColor(R.styleable.MeowBottomNavigation_mbn_countBackgroundColor, countBackgroundColor)
-                rippleColor = getColor(R.styleable.MeowBottomNavigation_mbn_rippleColor, rippleColor)
-                shadowColor = getColor(R.styleable.MeowBottomNavigation_mbn_shadowColor, shadowColor)
+                defaultIconColor = getColor(R.styleable.SSCustomBottomNavigation_ss_defaultIconColor, defaultIconColor)
+                selectedIconColor = getColor(R.styleable.SSCustomBottomNavigation_ss_selectedIconColor, selectedIconColor)
+                backgroundBottomColor = getColor(R.styleable.SSCustomBottomNavigation_ss_backgroundBottomColor, backgroundBottomColor)
+                circleColor = getColor(R.styleable.SSCustomBottomNavigation_ss_circleColor, circleColor)
+                countTextColor = getColor(R.styleable.SSCustomBottomNavigation_ss_countTextColor, countTextColor)
+                countBackgroundColor = getColor(R.styleable.SSCustomBottomNavigation_ss_countBackgroundColor, countBackgroundColor)
+                rippleColor = getColor(R.styleable.SSCustomBottomNavigation_ss_rippleColor, rippleColor)
+                shadowColor = getColor(R.styleable.SSCustomBottomNavigation_ss_shadowColor, shadowColor)
+                iconTextColor = getColor(R.styleable.SSCustomBottomNavigation_ss_iconTextColor, iconTextColor)
+                iconTextSize = dipf(context,a.getDimensionPixelSize(R.styleable.SSCustomBottomNavigation_ss_iconTextSize,0))
+                val iconTexttypeface = getString(R.styleable.SSCustomBottomNavigation_ss_iconTextTypeface)
+                if (iconTexttypeface != null && iconTexttypeface.isNotEmpty())
+                    iconTextTypeface = Typeface.createFromAsset(context.assets, iconTexttypeface)
 
-                val typeface = getString(R.styleable.MeowBottomNavigation_mbn_countTypeface)
-               /* if (typeface != null && typeface.isNotEmpty())
-                    countTypeface = Typeface.createFromAsset(context.assets, typeface)*/
+                val typeface = getString(R.styleable.SSCustomBottomNavigation_ss_countTypeface)
+                /* if (typeface != null && typeface.isNotEmpty())
+                     countTypeface = Typeface.createFromAsset(context.assets, typeface)*/
             }
         } finally {
             a.recycle()
@@ -161,6 +185,9 @@ class SSCustomBottomNavigation : FrameLayout {
             count = model.count
             defaultIconColor = this@SSCustomBottomNavigation.defaultIconColor
             selectedIconColor = this@SSCustomBottomNavigation.selectedIconColor
+            iconTextTypeface = this@SSCustomBottomNavigation.iconTextTypeface
+            iconTextColor = this@SSCustomBottomNavigation.iconTextColor
+            iconTextSize = this@SSCustomBottomNavigation.iconTextSize
             //circleColor = this@MeowBottomNavigation.circleColor
             countTextColor = this@SSCustomBottomNavigation.countTextColor
             countBackgroundColor = this@SSCustomBottomNavigation.countBackgroundColor
@@ -194,6 +221,8 @@ class SSCustomBottomNavigation : FrameLayout {
             it.defaultIconColor = defaultIconColor
             it.selectedIconColor = selectedIconColor
             it.circleColor = circleColor
+            it.iconTextTypeface = iconTextTypeface
+            it.iconTextSize =  iconTextSize
             //it.countTextColor = countTextColor
             //it.countBackgroundColor = countBackgroundColor
             //it.countTypeface = countTypeface

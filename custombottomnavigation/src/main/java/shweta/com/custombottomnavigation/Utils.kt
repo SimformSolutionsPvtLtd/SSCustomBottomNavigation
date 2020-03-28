@@ -6,6 +6,7 @@ import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
@@ -21,6 +22,9 @@ internal fun dipf(context: Context, f: Float) = f * getDP(context)
 internal fun dipf(context: Context, i: Int) = i * getDP(context)
 
 internal fun dip(context: Context, i: Int) = (i * getDP(context)).toInt()
+
+internal fun toDP(context: Context,value: Int): Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value.toFloat(),context.resources.displayMetrics).toInt()
+
 
 internal object DrawableHelper {
 

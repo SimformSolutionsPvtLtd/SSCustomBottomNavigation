@@ -61,6 +61,27 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
                 tv.text = value
         }
 
+    var iconTextColor = 0
+        set(value) {
+            field = value
+            if (allowDraw)
+                tv.setTextColor(field)
+        }
+
+    var iconTextTypeface: Typeface? = null
+        set(value) {
+            field = value
+            if (allowDraw && field != null)
+                tv.typeface = field
+        }
+
+    var iconTextSize = 10f
+        set(value) {
+            field = value
+            if (allowDraw)
+                tv.textSize = field
+        }
+
     var count: String? = EMPTY_VALUE
         set(value) {
             field = value
@@ -206,6 +227,9 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
         icon = icon
         count = count
         iconSize = iconSize
+        iconTextTypeface = iconTextTypeface
+        iconTextColor = iconTextColor
+        iconTextSize = iconTextSize
         countTextColor = countTextColor
         countBackgroundColor = countBackgroundColor
         countTypeface = countTypeface

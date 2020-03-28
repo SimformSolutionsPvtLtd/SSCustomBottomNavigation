@@ -30,15 +30,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            app:mbn_circleColor="#ffffff"
-            app:mbn_backgroundBottomColor="#ffffff"
-            app:mbn_countBackgroundColor="#ff6f00"
-            app:mbn_countTextColor="#ffffff"
-            app:mbn_countTypeface="fonts/SourceSansPro-Regular.ttf"
-            app:mbn_defaultIconColor="#90a4ae"
-            app:mbn_rippleColor="#2f424242"
-            app:mbn_selectedIconColor="#3c415e"
-            app:mbn_shadowColor="#1f212121" />
+            app:ss_backgroundBottomColor="#ffffff"
+            app:ss_circleColor="#ffffff"
+            app:ss_countBackgroundColor="#ff6f00"
+            app:ss_countTextColor="#ffffff"
+            app:ss_countTypeface="fonts/graphik_medium.ttf"
+            app:ss_defaultIconColor="#90a4ae"
+            app:ss_iconTextColor="#6200EE"
+            app:ss_iconTextSize="1sp"
+            app:ss_iconTextTypeface="fonts/graphik_semibold.ttf"
+            app:ss_rippleColor="#2f424242"
+            app:ss_selectedIconColor="#3c415e"
+            app:ss_shadowColor="#1f212121" />
 
     </FrameLayout>
 
