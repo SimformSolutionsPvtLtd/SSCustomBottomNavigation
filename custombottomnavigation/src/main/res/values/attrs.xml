@@ -18,6 +18,7 @@
         <attr name="ss_selectedIconColor" format="color" />
         <attr name="ss_iconTextTypeface" format="string" />
         <attr name="ss_iconTextColor" format="color" />
+        <attr name="ss_selectedIconTextColor" format="color" />
         <attr name="ss_iconTextSize" format="dimension" />
         <attr name="ss_backgroundBottomColor" format="color" />
         <attr name="ss_circleColor" format="color" />

@@ -35,12 +35,13 @@
             app:ss_countBackgroundColor="#ff6f00"
             app:ss_countTextColor="#ffffff"
             app:ss_countTypeface="fonts/graphik_medium.ttf"
-            app:ss_defaultIconColor="#90a4ae"
+            app:ss_defaultIconColor="#6200EE"
             app:ss_iconTextColor="#6200EE"
             app:ss_iconTextSize="1sp"
             app:ss_iconTextTypeface="fonts/graphik_semibold.ttf"
             app:ss_rippleColor="#2f424242"
-            app:ss_selectedIconColor="#3c415e"
+            app:ss_selectedIconColor="#ff6f00"
+            app:ss_selectedIconTextColor="#ff6f00"
             app:ss_shadowColor="#1f212121" />
 
     </FrameLayout>

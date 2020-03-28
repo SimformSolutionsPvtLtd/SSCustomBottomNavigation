@@ -15,11 +15,7 @@ import android.widget.RelativeLayout
 import androidx.core.view.ViewCompat
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.custom_bottom_navigation_icon.view.fl
-import kotlinx.android.synthetic.main.custom_bottom_navigation_icon.view.iv
-import kotlinx.android.synthetic.main.custom_bottom_navigation_icon.view.tv
-import kotlinx.android.synthetic.main.custom_bottom_navigation_icon.view.tv_count
-import kotlinx.android.synthetic.main.custom_bottom_navigation_icon.view.v_circle
+import kotlinx.android.synthetic.main.custom_bottom_navigation_icon.view.*
 
 @Suppress("unused")
 class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
@@ -64,8 +60,17 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
     var iconTextColor = 0
         set(value) {
             field = value
+            if (allowDraw) {
+                if(!isEnabledCell) tv.setTextColor(iconTextColor) else tv.setTextColor(selectedIconTextColor)
+
+            }
+        }
+
+    var selectedIconTextColor = 0
+        set(value) {
+            field = value
             if (allowDraw)
-                tv.setTextColor(field)
+                if(isEnabledCell) tv.setTextColor(selectedIconTextColor) else tv.setTextColor(iconTextColor)
         }
 
     var iconTextTypeface: Typeface? = null
@@ -229,6 +234,7 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
         iconSize = iconSize
         iconTextTypeface = iconTextTypeface
         iconTextColor = iconTextColor
+        selectedIconTextColor = selectedIconTextColor
         iconTextSize = iconTextSize
         countTextColor = countTextColor
         countBackgroundColor = countBackgroundColor

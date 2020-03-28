@@ -77,6 +77,12 @@ class SSCustomBottomNavigation : FrameLayout {
             updateAllIfAllowDraw()
         }
 
+    var selectedIconTextColor = Color.parseColor("#003F87")
+        set(value) {
+            field = value
+            updateAllIfAllowDraw()
+        }
+
     var iconTextTypeface: Typeface? = null
         set(value) {
             field = value
@@ -128,6 +134,7 @@ class SSCustomBottomNavigation : FrameLayout {
                 rippleColor = getColor(R.styleable.SSCustomBottomNavigation_ss_rippleColor, rippleColor)
                 shadowColor = getColor(R.styleable.SSCustomBottomNavigation_ss_shadowColor, shadowColor)
                 iconTextColor = getColor(R.styleable.SSCustomBottomNavigation_ss_iconTextColor, iconTextColor)
+                selectedIconTextColor = getColor(R.styleable.SSCustomBottomNavigation_ss_selectedIconTextColor, selectedIconTextColor)
                 iconTextSize = dipf(context,a.getDimensionPixelSize(R.styleable.SSCustomBottomNavigation_ss_iconTextSize,0))
                 val iconTexttypeface = getString(R.styleable.SSCustomBottomNavigation_ss_iconTextTypeface)
                 if (iconTexttypeface != null && iconTexttypeface.isNotEmpty())
@@ -187,6 +194,7 @@ class SSCustomBottomNavigation : FrameLayout {
             selectedIconColor = this@SSCustomBottomNavigation.selectedIconColor
             iconTextTypeface = this@SSCustomBottomNavigation.iconTextTypeface
             iconTextColor = this@SSCustomBottomNavigation.iconTextColor
+            selectedIconTextColor = this@SSCustomBottomNavigation.selectedIconTextColor
             iconTextSize = this@SSCustomBottomNavigation.iconTextSize
             //circleColor = this@MeowBottomNavigation.circleColor
             countTextColor = this@SSCustomBottomNavigation.countTextColor
