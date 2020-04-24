@@ -5,7 +5,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/color_gray"
         android:orientation="vertical">
 
         <LinearLayout
@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:textColor="#3c415e"
+                android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -31,13 +31,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             app:ss_backgroundBottomColor="#ffffff"
-            app:ss_circleColor="#ffffff"
+            app:ss_circleColor="#ff6f00"
+            app:ss_waveHeight="7"
+            app:ss_bottomBarHeight="100dp"
             app:ss_countBackgroundColor="#ff6f00"
             app:ss_countTextColor="#ffffff"
             app:ss_countTypeface="fonts/graphik_medium.ttf"
             app:ss_defaultIconColor="#6200EE"
             app:ss_iconTextColor="#6200EE"
-            app:ss_iconTextSize="1sp"
             app:ss_iconTextTypeface="fonts/graphik_semibold.ttf"
             app:ss_rippleColor="#2f424242"
             app:ss_selectedIconColor="#ff6f00"

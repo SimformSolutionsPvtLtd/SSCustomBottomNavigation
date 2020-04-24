@@ -14,42 +14,50 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:elevation="6dp"
-        android:padding="8dp"
         android:orientation="vertical"
+        android:padding="8dp"
         tools:targetApi="lollipop">
 
-        <shweta.com.custombottomnavigation.CellImageView
-            android:id="@+id/iv"
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingTop="12dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            app:icon_imageview_size="24dp" />
+            android:elevation="6dp">
+
+            <shweta.com.custombottomnavigation.CellImageView
+                android:id="@+id/iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingStart="10dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="10dp"
+                app:icon_imageview_size="24dp" />
+
+            <TextView
+                android:id="@+id/tv_count"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_gravity="top|end|right"
+                android:layout_marginTop="13dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:minWidth="16dp"
+                android:textDirection="ltr"
+                android:textSize="8dp"
+                android:visibility="gone"
+                tools:ignore="RtlHardcoded,SpUsage" />
+        </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textSize="13dp"
-            android:gravity="center"
-            android:text="test" />
-
-        <TextView
-            android:id="@+id/tv_count"
-            android:layout_width="wrap_content"
-            android:layout_height="16dp"
-            android:layout_gravity="top|end|right"
-            android:gravity="center"
-            android:layout_marginTop="4dp"
+            android:gravity="center_horizontal"
             android:includeFontPadding="false"
-            android:textDirection="ltr"
-            android:minWidth="16dp"
-            android:textSize="8dp"
-            android:visibility="gone"
-            tools:ignore="RtlHardcoded,SpUsage" />
+            android:maxLines="1"
+            android:text="test"/>
 
     </LinearLayout>
 
