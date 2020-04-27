@@ -1,4 +1,4 @@
-package shweta.com.custombottomnavigation
+package com.simform.custombottomnavigation
 
 import org.junit.Test
 

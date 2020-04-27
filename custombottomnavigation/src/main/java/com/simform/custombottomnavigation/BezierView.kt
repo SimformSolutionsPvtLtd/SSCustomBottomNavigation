@@ -1,4 +1,4 @@
-package shweta.com.custombottomnavigation
+package com.simform.custombottomnavigation
 
 import android.annotation.SuppressLint
 import android.content.Context

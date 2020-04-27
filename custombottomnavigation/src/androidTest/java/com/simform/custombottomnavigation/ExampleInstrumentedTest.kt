@@ -1,4 +1,4 @@
-package shweta.com.sscustombottomnavigation
+package com.simform.custombottomnavigation
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("shweta.com.sscustombottomnavigation", appContext.packageName)
+        assertEquals("com.simform.custombottomnavigation.test", appContext.packageName)
     }
 }
