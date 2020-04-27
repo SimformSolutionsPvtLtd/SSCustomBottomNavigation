@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package shweta.com.custombottomnavigation
+package com.simform.custombottomnavigation
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -155,8 +155,8 @@ class SSCustomBottomNavigation : FrameLayout {
                     iconTextTypeface = Typeface.createFromAsset(context.assets, iconTexttypeface)
 
                 val typeface = getString(R.styleable.SSCustomBottomNavigation_ss_countTypeface)
-                /* if (typeface != null && typeface.isNotEmpty())
-                     countTypeface = Typeface.createFromAsset(context.assets, typeface)*/
+                if (typeface != null && typeface.isNotEmpty())
+                     countTypeface = Typeface.createFromAsset(context.assets, typeface)
             }
         } finally {
             a.recycle()
@@ -245,9 +245,9 @@ class SSCustomBottomNavigation : FrameLayout {
             it.circleColor = circleColor
             it.iconTextTypeface = iconTextTypeface
             it.iconTextSize =  iconTextSize
-            //it.countTextColor = countTextColor
-            //it.countBackgroundColor = countBackgroundColor
-            //it.countTypeface = countTypeface
+            it.countTextColor = countTextColor
+            it.countBackgroundColor = countBackgroundColor
+            it.countTypeface = countTypeface
         }
 
         bezierView.color = backgroundBottomColor

@@ -1,11 +1,11 @@
-package shweta.com.sscustombottomnavigation
+package com.sscustombottomnavigation
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import shweta.com.custombottomnavigation.SSCustomBottomNavigation
-import shweta.com.sscustombottomnavigation.databinding.ActivityMainBinding
+import com.simform.custombottomnavigation.SSCustomBottomNavigation
+import com.sscustombottomnavigation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,17 +16,6 @@ class MainActivity : AppCompatActivity() {
         private const val ID_NOTIFICATION = 4
         private const val ID_ACCOUNT = 5
     }
-
-//    @SuppressLint("NewApi")
-//    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-//    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-//    override fun attachBaseContext(newBase: Context?) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//            super.attachBaseContext(MyContextWrapper.wrap(newBase, "fa"))
-//        } else {
-//            super.attachBaseContext(newBase)
-//        }
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

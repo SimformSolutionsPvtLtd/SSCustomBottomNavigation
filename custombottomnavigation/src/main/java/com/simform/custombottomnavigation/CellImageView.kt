@@ -1,4 +1,4 @@
-package shweta.com.custombottomnavigation
+package com.simform.custombottomnavigation
 
 import android.animation.ValueAnimator
 import android.content.Context

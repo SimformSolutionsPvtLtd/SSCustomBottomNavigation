@@ -7,7 +7,7 @@ android {
     buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "shweta.com.sscustombottomnavigation"
+        applicationId "com.sscustombottomnavigation"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
