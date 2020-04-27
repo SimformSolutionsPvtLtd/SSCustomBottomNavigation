@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             add(SSCustomBottomNavigation.Model(ID_NOTIFICATION, R.drawable.ic_notification, "Notification"))
             add(SSCustomBottomNavigation.Model(ID_ACCOUNT, R.drawable.ic_account, "Account"))
 
-            setCount(ID_NOTIFICATION, "115")
+            setCount(ID_NOTIFICATION, "10")
 
             setOnShowListener {
                 val name = when (it.id) {

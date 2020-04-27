@@ -9,6 +9,8 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.os.Build
 import android.util.AttributeSet
+import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
@@ -83,8 +85,9 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
     var iconTextSize = 10f
         set(value) {
             field = value
-            if (allowDraw)
-                tv.textSize = field
+            if (allowDraw) {
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, field)
+            }
         }
 
     var count: String? = EMPTY_VALUE
@@ -155,14 +158,16 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
     private var progress = 0f
         set(value) {
             field = value
+            Log.e("TAG","height is ${containerView.layoutParams.height} ${dip(context, 18)}")
             fl.y = (1f - progress) * dip(context, 18) + dip(context, -2)
 
-            iv.color = if (progress == 1f) selectedIconColor else defaultIconColor
+            iv.color = if (progress == 1f) selectedIconColor else iconTextColor
+            tv.setTextColor(if (progress == 1f) selectedIconTextColor else defaultIconColor)
             val scale = (1f - progress) * (-0.2f) + 1f
             iv.scaleX = scale
             iv.scaleY = scale
 
-            val d = GradientDrawable()
+            /*val d = GradientDrawable()
             d.setColor(circleColor)
             d.shape = GradientDrawable.OVAL
 
@@ -172,7 +177,7 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
 
             val m = dip(context, 24)
             v_circle.x = (1f - progress) * (if (isFromLeft) -m else m) + ((measuredWidth - dip(context, 48)) / 2f)
-            v_circle.y = (1f - progress) * measuredHeight + dip(context, 6)
+            v_circle.y = (1f - progress) * measuredHeight + dip(context, 6)*/
         }
 
     var isEnabledCell = false

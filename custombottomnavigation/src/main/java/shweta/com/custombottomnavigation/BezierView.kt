@@ -27,7 +27,7 @@ class BezierView : View {
     private var bezierOuterHeight = 0f
     private var bezierInnerWidth = 0f
     private var bezierInnerHeight = 0f
-    private val shadowHeight = dipf(context, 52)   // this height will change bottomnavigation bg height
+    private val shadowHeight = dipf(context, 35)   // this height will change bottomnavigation bg height
 
     var color = 0
         set(value) {
@@ -76,6 +76,20 @@ class BezierView : View {
 
             invalidate()
         }
+
+    var waveHeight = 7
+        set(value) {
+            if (value == field)
+                return
+            if (value < 7) {
+                field = 7
+                invalidate()
+            } else {
+                    field = value
+                    invalidate()
+                }
+            }
+
 
     @SuppressLint("NewApi")
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
@@ -129,9 +143,9 @@ class BezierView : View {
         width = MeasureSpec.getSize(widthMeasureSpec).toFloat()
         height = MeasureSpec.getSize(heightMeasureSpec).toFloat()
         bezierOuterWidth = dipf(context, 72)
-        bezierOuterHeight = dipf(context, 8)
+        bezierOuterHeight = dipf(context, 0)
         bezierInnerWidth = dipf(context, 124)
-        bezierInnerHeight = dipf(context, 16)  // this will change curve shape
+        bezierInnerHeight = dipf(context, 0)  // this will change curve shape
 
         val extra = shadowHeight
         outerArray[0] = PointF(0f, bezierOuterHeight + extra)
@@ -174,11 +188,11 @@ class BezierView : View {
         }
         calculateInner()
 
-        path!!.lineTo(innerArray[0].x, innerArray[0].y - (bezierInnerHeight * 2)) // replace 80 with (bezierInnerHeight * 2) = 96
-        path.lineTo(innerArray[1].x, innerArray[1].y - (bezierInnerHeight * 2))
-        path.cubicTo(innerArray[2].x, innerArray[2].y - (bezierInnerHeight * 2), innerArray[3].x, innerArray[3].y - 116, innerArray[4].x, innerArray[4].y - 116)
-        path.cubicTo(innerArray[5].x, innerArray[5].y - 116, innerArray[6].x, innerArray[6].y - (bezierInnerHeight * 2), innerArray[7].x, innerArray[7].y - (bezierInnerHeight * 2))
-        path.lineTo(innerArray[8].x, innerArray[8].y - (bezierInnerHeight * 2))
+        path!!.lineTo(innerArray[0].x, innerArray[0].y)
+        path.lineTo(innerArray[1].x, innerArray[1].y)
+        path.cubicTo(innerArray[2].x, innerArray[2].y, innerArray[3].x, innerArray[3].y, innerArray[4].x, innerArray[4].y)
+        path.cubicTo(innerArray[5].x, innerArray[5].y, innerArray[6].x, innerArray[6].y, innerArray[7].x, innerArray[7].y)
+        path.lineTo(innerArray[8].x, innerArray[8].y)
         path.lineTo(innerArray[9].x, innerArray[9].y)
         path.lineTo(innerArray[10].x, innerArray[10].y)
 
@@ -192,9 +206,9 @@ class BezierView : View {
         innerArray[0] = PointF(0f, bezierInnerHeight + extra)
         innerArray[1] = PointF((bezierX - bezierInnerWidth / 2), bezierInnerHeight + extra)
         innerArray[2] = PointF(bezierX - bezierInnerWidth / 4, bezierInnerHeight + extra)
-        innerArray[3] = PointF(bezierX - bezierInnerWidth / 4, height - extra)
-        innerArray[4] = PointF(bezierX, height - extra)
-        innerArray[5] = PointF(bezierX + bezierInnerWidth / 4, height - extra)
+        innerArray[3] = PointF(bezierX - bezierInnerWidth / 4, (height - extra) / waveHeight)
+        innerArray[4] = PointF(bezierX, (height - extra) / waveHeight)
+        innerArray[5] = PointF(bezierX + bezierInnerWidth / 4, (height - extra) / waveHeight)
         innerArray[6] = PointF(bezierX + bezierInnerWidth / 4, bezierInnerHeight + extra)
         innerArray[7] = PointF(bezierX + bezierInnerWidth / 2, bezierInnerHeight + extra)
         innerArray[8] = PointF(width, bezierInnerHeight + extra)
@@ -206,11 +220,11 @@ class BezierView : View {
         val paint = if (isShadow) shadowPaint else mainPaint
         val path = if (isShadow) shadowPath else mainPath
 
-        path!!.lineTo(progressArray[0].x, progressArray[0].y - (bezierInnerHeight * 2))
-        path.lineTo(progressArray[1].x, progressArray[1].y - (bezierInnerHeight * 2))
-        path.cubicTo(progressArray[2].x, progressArray[2].y - (bezierInnerHeight * 2), progressArray[3].x, progressArray[3].y - 116, progressArray[4].x, progressArray[4].y - 116)
-        path.cubicTo(progressArray[5].x, progressArray[5].y - 116, progressArray[6].x, progressArray[6].y - (bezierInnerHeight * 2), progressArray[7].x, progressArray[7].y - (bezierInnerHeight * 2))
-        path.lineTo(progressArray[8].x, progressArray[8].y - (bezierInnerHeight * 2))
+        path!!.lineTo(progressArray[0].x, progressArray[0].y)
+        path.lineTo(progressArray[1].x, progressArray[1].y)
+        path.cubicTo(progressArray[2].x, progressArray[2].y, progressArray[3].x, progressArray[3].y, progressArray[4].x, progressArray[4].y)
+        path.cubicTo(progressArray[5].x, progressArray[5].y, progressArray[6].x, progressArray[6].y, progressArray[7].x, progressArray[7].y)
+        path.lineTo(progressArray[8].x, progressArray[8].y)
         path.lineTo(progressArray[9].x, progressArray[9].y)
         path.lineTo(progressArray[10].x, progressArray[10].y)
 

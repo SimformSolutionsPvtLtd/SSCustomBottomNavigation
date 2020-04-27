@@ -25,6 +25,7 @@ internal fun dip(context: Context, i: Int) = (i * getDP(context)).toInt()
 
 internal fun toDP(context: Context,value: Int): Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value.toFloat(),context.resources.displayMetrics).toInt()
 
+internal fun toPx(context: Context,value: Float): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, value,context.resources.displayMetrics)
 
 internal object DrawableHelper {
 
