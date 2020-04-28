@@ -95,12 +95,6 @@ class SSCustomBottomNavigation : FrameLayout {
             updateAllIfAllowDraw()
         }
 
-    var bottomBarHeight = 100f
-        set(value) {
-            field = value
-            updateAllIfAllowDraw()
-        }
-
     var waveHeight = 7
         set(value) {
             field = value
@@ -148,7 +142,6 @@ class SSCustomBottomNavigation : FrameLayout {
                 iconTextColor = getColor(R.styleable.SSCustomBottomNavigation_ss_iconTextColor, iconTextColor)
                 selectedIconTextColor = getColor(R.styleable.SSCustomBottomNavigation_ss_selectedIconTextColor, selectedIconTextColor)
                 iconTextSize = getDimensionPixelSize(R.styleable.SSCustomBottomNavigation_ss_iconTextSize, dip(context, iconTextSize.toInt())).toFloat()
-                bottomBarHeight = getDimension(R.styleable.SSCustomBottomNavigation_ss_bottomBarHeight, dipf(context, bottomBarHeight))
                 waveHeight = getInteger(R.styleable.SSCustomBottomNavigation_ss_waveHeight, waveHeight)
                 val iconTexttypeface = getString(R.styleable.SSCustomBottomNavigation_ss_iconTextTypeface)
                 if (iconTexttypeface != null && iconTexttypeface.isNotEmpty())
@@ -166,7 +159,7 @@ class SSCustomBottomNavigation : FrameLayout {
     private fun initializeViews() {
         ll_cells = LinearLayout(context)
         ll_cells.apply {
-            val params = LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, bottomBarHeight.toInt())
+            val params = LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, heightCell)
             params.gravity = Gravity.BOTTOM
             layoutParams = params
             orientation = LinearLayout.HORIZONTAL
@@ -176,7 +169,7 @@ class SSCustomBottomNavigation : FrameLayout {
 
         bezierView = BezierView(context)
         bezierView.apply {
-            layoutParams = LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (bottomBarHeight.toInt()))
+            layoutParams = LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (heightCell))
             color = backgroundBottomColor
             shadowColor = this@SSCustomBottomNavigation.shadowColor
         }
@@ -200,7 +193,7 @@ class SSCustomBottomNavigation : FrameLayout {
     fun add(model: Model) {
         val cell = CustomBottomNavigationIcon(context)
         cell.apply {
-            val params = LinearLayout.LayoutParams(0, bottomBarHeight.toInt(), 1f)
+            val params = LinearLayout.LayoutParams(0, heightCell, 1f)
             layoutParams = params
             icon = model.icon
             iconText = model.text

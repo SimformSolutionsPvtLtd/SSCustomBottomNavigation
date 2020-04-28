@@ -33,7 +33,6 @@
             app:ss_backgroundBottomColor="#ffffff"
             app:ss_circleColor="#ff6f00"
             app:ss_waveHeight="7"
-            app:ss_bottomBarHeight="100dp"
             app:ss_countBackgroundColor="#ff6f00"
             app:ss_countTextColor="#ffffff"
             app:ss_countTypeface="fonts/graphik_semibold.ttf"
@@ -41,6 +40,7 @@
             app:ss_iconTextColor="#6200EE"
             app:ss_iconTextTypeface="fonts/graphik_semibold.ttf"
             app:ss_rippleColor="#2f424242"
+            app:ss_iconTextSize="14sp"
             app:ss_selectedIconColor="#ff6f00"
             app:ss_selectedIconTextColor="#ff6f00"
             app:ss_shadowColor="#1f212121" />

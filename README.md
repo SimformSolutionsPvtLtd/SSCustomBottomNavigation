@@ -13,7 +13,7 @@ The actual features are:
 ### Demo
 ------------------------
 
-![demo_data]()
+![demo_data](https://github.com/simformsolutions/CustomBottomNavigation/blob/master/images/demo.gif)
 
 ### All Attributes
 ------------------------
@@ -33,19 +33,30 @@ The actual features are:
 | `app:ss_countTypeface` | Set Font for Notification Badge | `none` |
 | `app:ss_rippleColor` | Set Ripple Color | `#757575` |
 | `app:ss_shadowColor` | Set Bottom Bar Shadow Color | `shadowColor` |
-| `android:icon_imageview_useColor` | Set true to use color | `true` |
-| `app:icon_imageview_isBitmap` | Set true to use Bitmap  | `false` |
-| `app:icon_imageview_resource` | Set Bottom Bar resource if isBitmap is set to true | `` |
-| `app:icon_imageview_color` | Set Bottom Bar Icon Color if useColor is set to true | `` |
-| `app:icon_imageview_size` | Set Bottom Bar Icon Size | `24` |
-| `app:icon_imageview_actionBackgroundAlpha` | Set Outlined border width | `false` |
-| `app:icon_imageview_changeSize` | Set true to change Bottom Bar Icon | `true` |
-| `app:icon_imageview_fitImage` | Scale Bottom Bar Icon | `false` |
 
 ### Usage
 ------------------------
 
 ```
+<com.simform.custombottomnavigation.SSCustomBottomNavigation
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:ss_backgroundBottomColor="#ffffff"
+            app:ss_circleColor="#ff6f00"
+            app:ss_waveHeight="7"
+            app:ss_countBackgroundColor="#ff6f00"
+            app:ss_countTextColor="#ffffff"
+            app:ss_countTypeface="fonts/graphik_semibold.ttf"
+            app:ss_defaultIconColor="#6200EE"
+            app:ss_iconTextColor="#6200EE"
+            app:ss_iconTextTypeface="fonts/graphik_semibold.ttf"
+            app:ss_rippleColor="#2f424242"
+            app:ss_iconTextSize="14sp"
+            app:ss_selectedIconColor="#ff6f00"
+            app:ss_selectedIconTextColor="#ff6f00"
+            app:ss_shadowColor="#1f212121" />
 
 ```
 
