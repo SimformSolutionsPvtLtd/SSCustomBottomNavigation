@@ -13,7 +13,7 @@ The actual features are:
 ### Demo
 ------------------------
 
-![demo_data](https://github.com/simformsolutions/CustomBottomNavigation/blob/master/images/demo.gif)
+<img src="https://github.com/simformsolutions/sscustombottomnavigation/blob/master/images/demo.gif" width="320" height="624"/>
 
 ### All Attributes
 ------------------------
