@@ -13,7 +13,7 @@ The actual features are:
 ### Demo
 ------------------------
 
-![demo_data](https://github.com/simformsolutions/CustomBottomNavigation/blob/master/images/custom_bottom_navigation.gif)
+![demo_data](https://raw.githubusercontent.com/simformsolutions/SSCustomBottomNavigation/master/SSCustomBottomNavigation/images/custom_bottom_navigation.gif)
 
 
 ### All Attributes
@@ -37,7 +37,8 @@ The actual features are:
 
 # Customization
 ------------------------
-![alt text](https://github.com/simformsolutions/CustomBottomNavigation/blob/master/images/custom_bottom_navigation_image.png)
+![alt text](https://raw.githubusercontent.com/simformsolutions/SSCustomBottomNavigation/master/SSCustomBottomNavigation/images/custom_bottom_navigation_image.png)
+
 
 ### Usage
 ------------------------
