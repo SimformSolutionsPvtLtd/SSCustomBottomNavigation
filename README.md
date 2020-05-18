@@ -13,7 +13,7 @@ The actual features are:
 ### Demo
 ------------------------
 
-![demo_data](https://github.com/simformsolutions/CustomBottomNavigation/blob/master/images/custom_bottom_navigation.gif)
+![demo_data](https://github.com/simformsolutions/SSCustomBottomNavigation/blob/master/images/custom_bottom_navigation.gif)
 
 
 ### All Attributes
@@ -37,7 +37,8 @@ The actual features are:
 
 # Customization
 ------------------------
-![alt text](https://github.com/simformsolutions/CustomBottomNavigation/blob/master/images/custom_bottom_navigation_image.png)
+![alt text](https://github.com/simformsolutions/SSCustomBottomNavigation/blob/master/images/custom_bottom_navigation_image.png)
+
 
 ### Usage
 ------------------------
@@ -71,6 +72,9 @@ The actual features are:
 
 ## Find this library useful? :heart:
 Support it by joining __[stargazers](https://github.com/simformsolutions/SSCustomBottomNavigation/stargazers)__ for this repository. :star:
+
+## iOS Library.
+- Check our iOS Library also on [Github](https://github.com/simformsolutions/SSCustomTabbar)
 
 ## License
 
