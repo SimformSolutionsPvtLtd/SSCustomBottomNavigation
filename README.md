@@ -15,6 +15,7 @@ The actual features are:
 
 ![demo_data](https://github.com/simformsolutions/CustomBottomNavigation/blob/master/images/custom_bottom_navigation.gif)
 
+
 ### All Attributes
 ------------------------
 
