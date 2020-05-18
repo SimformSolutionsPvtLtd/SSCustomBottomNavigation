@@ -13,7 +13,8 @@ The actual features are:
 ### Demo
 ------------------------
 
-<img src="https://github.com/simformsolutions/sscustombottomnavigation/blob/master/images/demo.gif" width="320" height="624"/>
+![demo_data](https://github.com/simformsolutions/CustomBottomNavigation/blob/master/images/custom_bottom_navigation.gif)
+
 
 ### All Attributes
 ------------------------
@@ -33,6 +34,10 @@ The actual features are:
 | `app:ss_countTypeface` | Set Font for Notification Badge | `none` |
 | `app:ss_rippleColor` | Set Ripple Color | `#757575` |
 | `app:ss_shadowColor` | Set Bottom Bar Shadow Color | `shadowColor` |
+
+# Customization
+------------------------
+![alt text](https://github.com/simformsolutions/CustomBottomNavigation/blob/master/images/custom_bottom_navigation_image.png)
 
 ### Usage
 ------------------------

@@ -3,6 +3,7 @@ package com.sscustombottomnavigation
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.simform.custombottomnavigation.SSCustomBottomNavigation
 import com.sscustombottomnavigation.databinding.ActivityMainBinding
@@ -27,10 +28,16 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.apply {
 
             add(SSCustomBottomNavigation.Model(ID_HOME, R.drawable.ic_home, "Home"))
-            add(SSCustomBottomNavigation.Model(ID_EXPLORE, R.drawable.ic_explore, "Explore"))
-            add(SSCustomBottomNavigation.Model(ID_MESSAGE, R.drawable.ic_message, "Message"))
-            add(SSCustomBottomNavigation.Model(ID_NOTIFICATION, R.drawable.ic_notification, "Notification"))
-            add(SSCustomBottomNavigation.Model(ID_ACCOUNT, R.drawable.ic_account, "Account"))
+            add(SSCustomBottomNavigation.Model(ID_EXPLORE, R.drawable.ic_heart, "Favorite"))
+            add(SSCustomBottomNavigation.Model(ID_MESSAGE, R.drawable.ic_message, "Chat"))
+            add(
+                SSCustomBottomNavigation.Model(
+                    ID_NOTIFICATION,
+                    R.drawable.ic_notification,
+                    "Notification"
+                )
+            )
+            add(SSCustomBottomNavigation.Model(ID_ACCOUNT, R.drawable.ic_account, "Profile"))
 
             setCount(ID_NOTIFICATION, "10")
 
@@ -44,7 +51,17 @@ class MainActivity : AppCompatActivity() {
                     else -> ""
                 }
 
+                val bgColor = when (it.id) {
+                    ID_HOME -> ContextCompat.getColor(this@MainActivity, R.color.color_home_bg)
+                    ID_EXPLORE -> ContextCompat.getColor(this@MainActivity, R.color.color_favorite_bg)
+                    ID_MESSAGE -> ContextCompat.getColor(this@MainActivity, R.color.color_chat_bg)
+                    ID_NOTIFICATION -> ContextCompat.getColor(this@MainActivity, R.color.color_notification_bg)
+                    ID_ACCOUNT -> ContextCompat.getColor(this@MainActivity, R.color.color_profile_bg)
+                    else -> ContextCompat.getColor(this@MainActivity, R.color.colorPrimary)
+                }
+
                 tvSelected.text = getString(R.string.main_page_selected, name)
+                binding.lnrLayout.setBackgroundColor(bgColor)
             }
 
             setOnClickMenuListener {
