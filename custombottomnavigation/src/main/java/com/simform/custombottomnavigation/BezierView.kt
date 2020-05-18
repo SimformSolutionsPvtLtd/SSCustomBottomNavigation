@@ -31,13 +31,13 @@ class BezierView : View {
 
     var color = 0
         set(value) {
-            field = Color.WHITE
+            field = value
             mainPaint?.color = field
             invalidate()
         }
     var shadowColor = 0
         set(value) {
-            field = Color.WHITE
+            field = value
             shadowPaint?.setShadowLayer(dipf(context, 2), 0f, 0f, shadowColor)
             invalidate()
         }

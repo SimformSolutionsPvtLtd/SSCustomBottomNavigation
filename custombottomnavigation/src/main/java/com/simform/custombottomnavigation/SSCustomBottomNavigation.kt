@@ -206,6 +206,7 @@ class SSCustomBottomNavigation : FrameLayout {
             iconTextSize = this@SSCustomBottomNavigation.iconTextSize
             countTextColor = this@SSCustomBottomNavigation.countTextColor
             countBackgroundColor = this@SSCustomBottomNavigation.countBackgroundColor
+            backgroundBottomColor = this@SSCustomBottomNavigation.backgroundBottomColor
             countTypeface = this@SSCustomBottomNavigation.countTypeface
             rippleColor = this@SSCustomBottomNavigation.rippleColor
             onClickListener = {
