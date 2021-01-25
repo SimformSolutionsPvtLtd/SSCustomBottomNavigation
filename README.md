@@ -3,7 +3,7 @@
 
 Getting Started
 ------------------------
-`SSCustomBottomNavigation` is a customizable bottom bar library with curved animations.
+**SSCustomBottomNavigation** is a customizable bottom bar library with curved animations.
 
 The actual features are:
 
@@ -19,22 +19,22 @@ The actual features are:
 ### Gradle Dependency
 * Add it in your root build.gradle at the end of repositories:
 
-```
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
-}
-```
+	```
+	allprojects {
+	    repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	    }
+	}
+	```
 
 * Add the dependency in your app's build.gradle file
 
-```
-dependencies {
-	implementation 'com.github.simformsolutions:SSCustomBottomNavigation:1.0'
-}
-```
+	```
+	dependencies {
+		implementation 'com.github.simformsolutions:SSCustomBottomNavigation:1.0'
+	}
+	```
 
 ### All Attributes
 ------------------------
