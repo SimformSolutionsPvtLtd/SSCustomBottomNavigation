@@ -1,5 +1,5 @@
 # SSCustomBottomNavigation
-[![Kotlin Version](https://img.shields.io/badge/Kotlin-v1.3.61-blue.svg)](https://kotlinlang.org)  [![Platform](https://img.shields.io/badge/Platform-Android-green.svg?style=flat)](https://www.android.com/) [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
+[![Kotlin Version](https://img.shields.io/badge/Kotlin-v1.5.20-blue.svg)](https://kotlinlang.org)  [![Platform](https://img.shields.io/badge/Platform-Android-green.svg?style=flat)](https://www.android.com/) [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 
 Getting Started
 ------------------------
@@ -32,7 +32,7 @@ The actual features are:
 
 	```
 	dependencies {
-		implementation 'com.github.simformsolutions:SSCustomBottomNavigation:1.0'
+		implementation 'com.github.simformsolutions:SSCustomBottomNavigation:2.1'
 	}
 	```
 
