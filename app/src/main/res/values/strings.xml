@@ -1,4 +1,20 @@
 <resources>
     <string name="app_name">SSCustomBottomNavigation</string>
     <string name="main_page_selected">%s page is selected</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_favorite">Favourite</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
+
+    <string name="content_home">Home Screen</string>
+    <string name="content_favorite">Favourite Screen</string>
+    <string name="content_chat">Chat Screen</string>
+    <string name="content_notification">Notification Screen</string>
+    <string name="content_profile">Profile Screen</string>
+
+    <string name="empty_value">empty</string>
+    <string name="count">10</string>
+    <string name="count_update">20</string>
 </resources>

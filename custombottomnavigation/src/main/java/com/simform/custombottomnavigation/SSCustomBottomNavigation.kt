@@ -2,6 +2,9 @@
 
 package com.simform.custombottomnavigation
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Color
@@ -9,23 +12,32 @@ import android.graphics.Typeface
 import android.os.Build
 import android.util.AttributeSet
 import android.util.LayoutDirection
+import android.util.Log
 import android.view.Gravity
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import androidx.annotation.IdRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.NavGraph
+import androidx.navigation.NavOptions
 import kotlin.math.abs
 
-internal typealias IBottomNavigationListener = (model: SSCustomBottomNavigation.Model) -> Unit
+internal typealias IBottomNavigationListener = (model: Model) -> Unit
 
 @Suppress("MemberVisibilityCanBePrivate")
 class SSCustomBottomNavigation : FrameLayout {
 
+    // initialize empty array so that we don't have to check if it's initialized or not
+    private var cbnMenuItems: Array<Model> = arrayOf()
     var models = ArrayList<Model>()
     var cells = ArrayList<CustomBottomNavigationIcon>()
         private set
     private var callListenerWhenIsSelected = false
 
-    private var selectedId = -1
+    private var selectedIndex = -1
 
     private var onClickedListener: IBottomNavigationListener = {}
     private var onShowListener: IBottomNavigationListener = {}
@@ -33,6 +45,14 @@ class SSCustomBottomNavigation : FrameLayout {
 
     private var heightCell = 0
     private var isAnimating = false
+
+    // listener for the menuItemClick
+    private var menuItemClickListener: ((Model, Int) -> Unit)? = null
+
+    // control the rendering of the menu when the menu is empty
+    private var isMenuInitialized = false
+
+    private var animatorSet = AnimatorSet()
 
     var defaultIconColor = Color.parseColor("#757575")
         set(value) {
@@ -45,6 +65,12 @@ class SSCustomBottomNavigation : FrameLayout {
             updateAllIfAllowDraw()
         }
     var backgroundBottomColor = Color.parseColor("#FF5733")
+        set(value) {
+            field = value
+            updateAllIfAllowDraw()
+        }
+    var backgroundBottomDrawable =
+        AppCompatResources.getDrawable(context, R.drawable.bottom_drawable_default)
         set(value) {
             field = value
             updateAllIfAllowDraw()
@@ -101,6 +127,14 @@ class SSCustomBottomNavigation : FrameLayout {
             updateAllIfAllowDraw()
         }
 
+    fun setSelectedIndex(activeIndex: Int = 0) {
+        selectedIndex = activeIndex
+    }
+
+    fun getSelectedIndex(): Int {
+        return selectedIndex
+    }
+
     private var rippleColor = Color.parseColor("#757575")
 
     private var allowDraw = false
@@ -122,34 +156,70 @@ class SSCustomBottomNavigation : FrameLayout {
         initializeViews()
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         setAttributeFromXml(context, attrs)
         initializeViews()
     }
 
     private fun setAttributeFromXml(context: Context, attrs: AttributeSet) {
-        val a = context.theme.obtainStyledAttributes(attrs, R.styleable.SSCustomBottomNavigation, 0, 0)
+        val a =
+            context.theme.obtainStyledAttributes(attrs, R.styleable.SSCustomBottomNavigation, 0, 0)
         try {
             a.apply {
-                defaultIconColor = getColor(R.styleable.SSCustomBottomNavigation_ss_defaultIconColor, defaultIconColor)
-                selectedIconColor = getColor(R.styleable.SSCustomBottomNavigation_ss_selectedIconColor, selectedIconColor)
-                backgroundBottomColor = getColor(R.styleable.SSCustomBottomNavigation_ss_backgroundBottomColor, backgroundBottomColor)
-                circleColor = getColor(R.styleable.SSCustomBottomNavigation_ss_circleColor, circleColor)
-                countTextColor = getColor(R.styleable.SSCustomBottomNavigation_ss_countTextColor, countTextColor)
-                countBackgroundColor = getColor(R.styleable.SSCustomBottomNavigation_ss_countBackgroundColor, countBackgroundColor)
-                rippleColor = getColor(R.styleable.SSCustomBottomNavigation_ss_rippleColor, rippleColor)
-                shadowColor = getColor(R.styleable.SSCustomBottomNavigation_ss_shadowColor, shadowColor)
-                iconTextColor = getColor(R.styleable.SSCustomBottomNavigation_ss_iconTextColor, iconTextColor)
-                selectedIconTextColor = getColor(R.styleable.SSCustomBottomNavigation_ss_selectedIconTextColor, selectedIconTextColor)
-                iconTextSize = getDimensionPixelSize(R.styleable.SSCustomBottomNavigation_ss_iconTextSize, dip(context, iconTextSize.toInt())).toFloat()
-                waveHeight = getInteger(R.styleable.SSCustomBottomNavigation_ss_waveHeight, waveHeight)
-                val iconTexttypeface = getString(R.styleable.SSCustomBottomNavigation_ss_iconTextTypeface)
-                if (iconTexttypeface != null && iconTexttypeface.isNotEmpty())
-                    iconTextTypeface = Typeface.createFromAsset(context.assets, iconTexttypeface)
+                defaultIconColor = getColor(
+                    R.styleable.SSCustomBottomNavigation_ss_defaultIconColor,
+                    defaultIconColor
+                )
+                selectedIconColor = getColor(
+                    R.styleable.SSCustomBottomNavigation_ss_selectedIconColor,
+                    selectedIconColor
+                )
+                backgroundBottomColor = getColor(
+                    R.styleable.SSCustomBottomNavigation_ss_backgroundBottomColor,
+                    backgroundBottomColor
+                )
+                circleColor =
+                    getColor(R.styleable.SSCustomBottomNavigation_ss_circleColor, circleColor)
+                countTextColor =
+                    getColor(R.styleable.SSCustomBottomNavigation_ss_countTextColor, countTextColor)
+                countBackgroundColor = getColor(
+                    R.styleable.SSCustomBottomNavigation_ss_countBackgroundColor,
+                    countBackgroundColor
+                )
+                rippleColor =
+                    getColor(R.styleable.SSCustomBottomNavigation_ss_rippleColor, rippleColor)
+                shadowColor =
+                    getColor(R.styleable.SSCustomBottomNavigation_ss_shadowColor, shadowColor)
+                iconTextColor =
+                    getColor(R.styleable.SSCustomBottomNavigation_ss_iconTextColor, iconTextColor)
+                selectedIconTextColor = getColor(
+                    R.styleable.SSCustomBottomNavigation_ss_selectedIconTextColor,
+                    selectedIconTextColor
+                )
+                iconTextSize = getDimensionPixelSize(
+                    R.styleable.SSCustomBottomNavigation_ss_iconTextSize,
+                    dip(context, iconTextSize.toInt())
+                ).toFloat()
+                waveHeight =
+                    getInteger(R.styleable.SSCustomBottomNavigation_ss_waveHeight, waveHeight)
+                val iconTextTypeFace =
+                    getString(R.styleable.SSCustomBottomNavigation_ss_iconTextTypeface)
+                if (iconTextTypeFace != null && iconTextTypeFace.isNotEmpty())
+                    iconTextTypeface = Typeface.createFromAsset(context.assets, iconTextTypeFace)
 
                 val typeface = getString(R.styleable.SSCustomBottomNavigation_ss_countTypeface)
                 if (typeface != null && typeface.isNotEmpty())
-                     countTypeface = Typeface.createFromAsset(context.assets, typeface)
+                    countTypeface = Typeface.createFromAsset(context.assets, typeface)
+
+                val drawable =
+                    a.getDrawable(R.styleable.SSCustomBottomNavigation_ss_backgroundBottomDrawable)
+                if (drawable != null) {
+                    backgroundBottomDrawable = drawable
+                }
             }
         } finally {
             a.recycle()
@@ -182,12 +252,138 @@ class SSCustomBottomNavigation : FrameLayout {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        if (selectedId == -1) {
-            bezierView.bezierX = if (Build.VERSION.SDK_INT >= 17 && layoutDirection == LayoutDirection.RTL) measuredWidth + dipf(context, 72) else -dipf(context, 72)
+        if (selectedIndex == -1) {
+            bezierView.bezierX =
+                if (Build.VERSION.SDK_INT >= 21 && layoutDirection == LayoutDirection.RTL) measuredWidth + dipf(
+                    context,
+                    72
+                ) else -dipf(context, 72)
         }
-        if (selectedId != -1) {
-            show(selectedId, false)
+        if (selectedIndex != -1) {
+            Log.e("selectedIndex", " $selectedIndex")
+            show(selectedIndex, false)
         }
+    }
+
+    fun setMenuItems(models: Array<Model>, activeIndex: Int = 0) {
+        if (models.isEmpty()) {
+            isMenuInitialized = false
+            return
+        }
+
+        this.cbnMenuItems = models
+        isMenuInitialized = true
+        selectedIndex = activeIndex
+
+        this.cbnMenuItems.forEachIndexed { _, cbnMenuItem ->
+            add(
+                Model(
+                    destinationId = cbnMenuItem.destinationId,
+                    icon = cbnMenuItem.icon,
+                    id = cbnMenuItem.id,
+                    text = cbnMenuItem.text,
+                    count = cbnMenuItem.count
+                )
+            )
+        }
+    }
+
+    fun getMenuItems(): Array<Model> {
+        return cbnMenuItems
+    }
+
+    // set the click listener for menu items
+    fun setOnMenuItemClickListener(menuItemClickListener: (Model, Int) -> Unit) {
+        this.menuItemClickListener = menuItemClickListener
+    }
+
+    // function to setup with navigation controller just like in BottomNavigationView
+    fun setupWithNavController(navController: NavController) {
+        // check for menu initialization
+        if (!isMenuInitialized) {
+            throw RuntimeException("initialize menu by calling setMenuItems() before setting up with NavController")
+        }
+
+        // initialize the menu
+        setOnMenuItemClickListener { item, _ ->
+            navigateToDestination(navController, item)
+        }
+        // setup destination change listener to properly sync the back button press
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            for (i in cbnMenuItems.indices) {
+                if (matchDestination(destination, cbnMenuItems[i].destinationId)) {
+                    if (selectedIndex != i && isAnimating) {
+                        // this is triggered internally, even if the animations looks kinda funky (if duration is long)
+                        // but we will sync with the destination
+                        animatorSet.cancel()
+                        isAnimating = false
+                    }
+                }
+            }
+        }
+    }
+
+    fun onMenuItemClick(menuItemPos: Int) {
+        if (selectedIndex == menuItemPos) {
+            Log.i("TAG", "same icon multiple clicked, skipping animation!")
+            return
+        }
+        if (isAnimating) {
+            Log.i("TAG", "animation is in progress, skipping navigation")
+            return
+        }
+
+        selectedIndex = menuItemPos
+        isAnimating = true
+
+        // notify the listener
+        menuItemClickListener?.invoke(cbnMenuItems[menuItemPos], menuItemPos)
+
+    }
+
+    // source code referenced from the actual JetPack Navigation Component
+    // refer to the original source code
+    private fun navigateToDestination(navController: NavController, itemCbn: Model) {
+        if (itemCbn.destinationId == -1) {
+            throw RuntimeException("please set a valid id, unable the navigation!")
+        }
+        val builder = NavOptions.Builder()
+            .setLaunchSingleTop(true)
+            .setEnterAnim(R.anim.nav_default_enter_anim)
+            .setExitAnim(R.anim.nav_default_exit_anim)
+            .setPopEnterAnim(R.anim.nav_default_pop_enter_anim)
+            .setPopExitAnim(R.anim.nav_default_pop_exit_anim)
+        // pop to the navigation graph's start  destination
+        builder.setPopUpTo(findStartDestination(navController.graph).id, false)
+        val options = builder.build()
+        try {
+            navController.popBackStack()
+            navController.navigate(itemCbn.destinationId, null, options)
+        } catch (e: IllegalArgumentException) {
+            Log.w("TAG", "unable to navigate!", e)
+        }
+    }
+
+    // source code referenced from the actual JetPack Navigation Component
+    // refer to the original source code
+    private fun matchDestination(destination: NavDestination, @IdRes destinationId: Int): Boolean {
+        var currentDestination = destination
+        while (currentDestination.id != destinationId && currentDestination.parent != null) {
+            currentDestination = currentDestination.parent!!
+        }
+
+        return currentDestination.id == destinationId
+    }
+
+    // source code referenced from the actual JetPack Navigation Component
+    // refer to the original source code
+    private fun findStartDestination(graph: NavGraph): NavDestination {
+        var startDestination: NavDestination = graph
+        while (startDestination is NavGraph) {
+            startDestination = graph.findNode(graph.startDestination)!!
+        }
+
+        return startDestination
     }
 
     fun add(model: Model) {
@@ -196,8 +392,8 @@ class SSCustomBottomNavigation : FrameLayout {
             val params = LinearLayout.LayoutParams(0, heightCell, 1f)
             layoutParams = params
             icon = model.icon
-            iconText = model.text
-            count = model.count
+            iconText = context.getString(model.text)
+            count = context.getString(model.count)
             defaultIconColor = this@SSCustomBottomNavigation.defaultIconColor
             selectedIconColor = this@SSCustomBottomNavigation.selectedIconColor
             iconTextTypeface = this@SSCustomBottomNavigation.iconTextTypeface
@@ -207,6 +403,7 @@ class SSCustomBottomNavigation : FrameLayout {
             countTextColor = this@SSCustomBottomNavigation.countTextColor
             countBackgroundColor = this@SSCustomBottomNavigation.countBackgroundColor
             backgroundBottomColor = this@SSCustomBottomNavigation.backgroundBottomColor
+            backgroundBottomDrawable = this@SSCustomBottomNavigation.backgroundBottomDrawable
             countTypeface = this@SSCustomBottomNavigation.countTypeface
             rippleColor = this@SSCustomBottomNavigation.rippleColor
             onClickListener = {
@@ -238,7 +435,7 @@ class SSCustomBottomNavigation : FrameLayout {
             it.selectedIconColor = selectedIconColor
             it.circleColor = circleColor
             it.iconTextTypeface = iconTextTypeface
-            it.iconTextSize =  iconTextSize
+            it.iconTextSize = iconTextSize
             it.countTextColor = countTextColor
             it.countBackgroundColor = countBackgroundColor
             it.countTypeface = countTypeface
@@ -251,7 +448,7 @@ class SSCustomBottomNavigation : FrameLayout {
         isAnimating = true
 
         val pos = getModelPosition(id)
-        val nowPos = getModelPosition(selectedId)
+        val nowPos = getModelPosition(selectedIndex)
 
         val nPos = if (nowPos < 0) 0 else nowPos
         val dif = abs(pos - nPos)
@@ -275,6 +472,11 @@ class SSCustomBottomNavigation : FrameLayout {
                 if (f == 1f)
                     isAnimating = false
             }
+            addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    isAnimating = false
+                }
+            })
             start()
         }
 
@@ -305,15 +507,16 @@ class SSCustomBottomNavigation : FrameLayout {
                 anim(cell, id, enableAnimation)
                 cell.enableCell()
                 onShowListener(model)
+                menuItemClickListener?.invoke(cbnMenuItems[i], i)
             } else {
                 cell.disableCell()
             }
         }
-        selectedId = id
+        selectedIndex = id
     }
 
     fun isShowing(id: Int): Boolean {
-        return selectedId == id
+        return selectedIndex == id
     }
 
     fun getModelById(id: Int): Model? {
@@ -324,7 +527,7 @@ class SSCustomBottomNavigation : FrameLayout {
         return null
     }
 
-    fun getCellById(id: Int): CustomBottomNavigationIcon? {
+    fun getCellById(id: Int): CustomBottomNavigationIcon {
         return cells[getModelPosition(id)]
     }
 
@@ -337,18 +540,18 @@ class SSCustomBottomNavigation : FrameLayout {
         return -1
     }
 
-    fun setCount(id: Int, count: String) {
+    fun setCount(id: Int, count: Int) {
         val model = getModelById(id) ?: return
         val pos = getModelPosition(id)
         model.count = count
-        cells[pos].count = count
+        cells[pos].count = context.getString(count)
     }
 
     fun clearCount(id: Int) {
         val model = getModelById(id) ?: return
         val pos = getModelPosition(id)
-        model.count = CustomBottomNavigationIcon.EMPTY_VALUE
-        cells[pos].count = CustomBottomNavigationIcon.EMPTY_VALUE
+        model.count = R.string.empty_value
+        cells[pos].count = context.getString(R.string.empty_value)
     }
 
     fun clearAllCounts() {
@@ -367,11 +570,5 @@ class SSCustomBottomNavigation : FrameLayout {
 
     fun setOnReselectListener(listener: IBottomNavigationListener) {
         onReselectListener = listener
-    }
-
-    class Model(var id: Int, var icon: Int, var text: String) {
-
-        var count: String = CustomBottomNavigationIcon.EMPTY_VALUE
-
     }
 }
