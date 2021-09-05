@@ -2,17 +2,34 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/color_gray"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
+        <!--Below fragment is for NavController Navigation-->
+        <fragment
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/mobile_navigation" />
+
+        <!--Below layout is for normal Navigation-->
         <LinearLayout
             android:id="@+id/lnrLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:orientation="vertical">
 
             <TextView
@@ -26,27 +43,32 @@
 
         </LinearLayout>
 
+
         <com.simform.custombottomnavigation.SSCustomBottomNavigation
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:ss_backgroundBottomColor="#ffffff"
+            app:ss_backgroundBottomDrawable="@drawable/bottom_drawable"
             app:ss_circleColor="#ff6f00"
-            app:ss_waveHeight="7"
             app:ss_countBackgroundColor="#ff6f00"
             app:ss_countTextColor="#ffffff"
             app:ss_countTypeface="fonts/graphik_semibold.ttf"
             app:ss_defaultIconColor="@color/color_black"
             app:ss_iconTextColor="@color/color_black"
+            app:ss_iconTextSize="12sp"
             app:ss_iconTextTypeface="fonts/graphik_semibold.ttf"
             app:ss_rippleColor="#2f424242"
-            app:ss_iconTextSize="12sp"
             app:ss_selectedIconColor="#ff6f00"
             app:ss_selectedIconTextColor="#ff6f00"
-            app:ss_shadowColor="#1f212121" />
+            app:ss_shadowColor="#1f212121"
+            app:ss_waveHeight="7" />
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
 
