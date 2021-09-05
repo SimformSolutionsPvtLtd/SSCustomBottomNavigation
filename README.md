@@ -35,7 +35,7 @@ The actual features are:
 
 	```
 	dependencies {
-		implementation 'com.github.simformsolutions:SSCustomBottomNavigation:3.0'
+		implementation 'com.github.simformsolutions:SSCustomBottomNavigation:3.1'
 	}
 	```
 
@@ -233,7 +233,7 @@ binding.bottomNavigation.apply {
 }
 ```
 
-### New Way: (3.0 version) If you use latest version then you need to change your implementation
+### New Way: (If you use latest version then you need to change your implementation) (>= 3.0 version)
 
 ```kotlin
 
