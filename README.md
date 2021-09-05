@@ -232,7 +232,8 @@ binding.bottomNavigation.apply {
 }
 ```
 
-### New Way: (If you use latest version then you need to change your implementation) (3.0 version)
+### New Way: (3.0 version)
+## If you use latest version then you need to change your implementation
 
 ```kotlin
 
