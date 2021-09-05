@@ -63,7 +63,9 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
         set(value) {
             field = value
             if (allowDraw) {
-                if(!isEnabledCell) tv.setTextColor(iconTextColor) else tv.setTextColor(selectedIconTextColor)
+                if (!isEnabledCell) tv.setTextColor(iconTextColor) else tv.setTextColor(
+                    selectedIconTextColor
+                )
 
             }
         }
@@ -72,7 +74,9 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
         set(value) {
             field = value
             if (allowDraw)
-                if(isEnabledCell) tv.setTextColor(selectedIconTextColor) else tv.setTextColor(iconTextColor)
+                if (isEnabledCell) tv.setTextColor(selectedIconTextColor) else tv.setTextColor(
+                    iconTextColor
+                )
         }
 
     var iconTextTypeface: Typeface? = null
@@ -158,7 +162,7 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
     private var progress = 0f
         set(value) {
             field = value
-            Log.e("TAG","height is ${containerView.layoutParams.height} ${dip(context, 18)}")
+            Log.e("TAG", "height is ${containerView.layoutParams.height} ${dip(context, 18)}")
             fl.y = (1f - progress) * dip(context, 18) + dip(context, -2)
 
             iv.color = if (progress == 1f) selectedIconColor else iconTextColor
@@ -215,7 +219,11 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
         initializeView()
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         setAttributeFromXml(context, attrs)
         initializeView()
     }
@@ -226,7 +234,8 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
 
     private fun initializeView() {
         allowDraw = true
-        containerView = LayoutInflater.from(context).inflate(R.layout.custom_bottom_navigation_icon, this)
+        containerView =
+            LayoutInflater.from(context).inflate(R.layout.custom_bottom_navigation_icon, this)
         draw()
     }
 

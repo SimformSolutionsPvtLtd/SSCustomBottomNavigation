@@ -1,6 +1,21 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'maven-publish'
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.simform.custombottomnavigation'
+                artifactId = 'custombottomnavigation'
+                version = '3.2'
+            }
+        }
+    }
+}
 
 android {
     compileSdkVersion 30

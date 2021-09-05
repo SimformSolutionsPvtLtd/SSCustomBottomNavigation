@@ -35,7 +35,7 @@ The actual features are:
 
 	```
 	dependencies {
-		implementation 'com.github.simformsolutions:SSCustomBottomNavigation:3.1'
+		implementation 'com.github.simformsolutions:SSCustomBottomNavigation:3.2'
 	}
 	```
 
