@@ -1,3 +1,5 @@
+![alt text](https://github.com/simformsolutions/SSCustomBottomNavigation/blob/master/images/library_banner.png)
+
 # SSCustomBottomNavigation
 [![Kotlin Version](https://img.shields.io/badge/Kotlin-v1.5.20-blue.svg)](https://kotlinlang.org)  [![Platform](https://img.shields.io/badge/Platform-Android-green.svg?style=flat)](https://www.android.com/) [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19) [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-SSCustomBottomNavigation-green.svg?style=flat )](https://android-arsenal.com/details/1/8163)
 
@@ -9,6 +11,7 @@ The actual features are:
 
  * Bottom Bar which have customizable text, color, background, icon.
  * Animated wave with customizable height
+ * Native control and Jetpack Navigation support
 
 ### Demo
 ------------------------
@@ -65,24 +68,24 @@ The actual features are:
 
 ```
 <com.simform.custombottomnavigation.SSCustomBottomNavigation
-            android:id="@+id/bottomNavigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:ss_backgroundBottomColor="#ffffff"
-            app:ss_circleColor="#ff6f00"
-            app:ss_waveHeight="7"
-            app:ss_countBackgroundColor="#ff6f00"
-            app:ss_countTextColor="#ffffff"
-            app:ss_countTypeface="fonts/graphik_semibold.ttf"
-            app:ss_defaultIconColor="#6200EE"
-            app:ss_iconTextColor="#6200EE"
-            app:ss_iconTextTypeface="fonts/graphik_semibold.ttf"
-            app:ss_rippleColor="#2f424242"
-            app:ss_iconTextSize="14sp"
-            app:ss_selectedIconColor="#ff6f00"
-            app:ss_selectedIconTextColor="#ff6f00"
-            app:ss_shadowColor="#1f212121" />
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:ss_backgroundBottomColor="#ffffff"
+        app:ss_circleColor="#ff6f00"
+        app:ss_waveHeight="7"
+        app:ss_countBackgroundColor="#ff6f00"
+        app:ss_countTextColor="#ffffff"
+        app:ss_countTypeface="fonts/graphik_semibold.ttf"
+        app:ss_defaultIconColor="#6200EE"
+        app:ss_iconTextColor="#6200EE"
+        app:ss_iconTextTypeface="fonts/graphik_semibold.ttf"
+        app:ss_rippleColor="#2f424242"
+        app:ss_iconTextSize="14sp"
+        app:ss_selectedIconColor="#ff6f00"
+        app:ss_selectedIconTextColor="#ff6f00"
+        app:ss_shadowColor="#1f212121" />
 
 ```
 
