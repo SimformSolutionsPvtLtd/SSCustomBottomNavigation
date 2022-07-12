@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="com.sscustombottomnavigation.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="fullSensor"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

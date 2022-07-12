@@ -1,7 +1,7 @@
 ![alt text](https://github.com/simformsolutions/SSCustomBottomNavigation/blob/master/images/library_banner.png)
 
 # SSCustomBottomNavigation
-[![Kotlin Version](https://img.shields.io/badge/Kotlin-v1.5.30-blue.svg)](https://kotlinlang.org)  [![Platform](https://img.shields.io/badge/Platform-Android-green.svg?style=flat)](https://www.android.com/) [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19) [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-SSCustomBottomNavigation-green.svg?style=flat )](https://android-arsenal.com/details/1/8163)
+[![Kotlin Version](https://img.shields.io/badge/Kotlin-v1.6.10-blue.svg)](https://kotlinlang.org)  [![Platform](https://img.shields.io/badge/Platform-Android-green.svg?style=flat)](https://www.android.com/) [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19) [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-SSCustomBottomNavigation-green.svg?style=flat )](https://android-arsenal.com/details/1/8163)
 
 Getting Started
 ------------------------
@@ -35,7 +35,7 @@ The actual features are:
 
 	```
 	dependencies {
-		implementation 'com.github.simformsolutions:SSCustomBottomNavigation:3.2'
+		implementation 'com.github.simformsolutions:SSCustomBottomNavigation:3.3'
 	}
 	```
 
