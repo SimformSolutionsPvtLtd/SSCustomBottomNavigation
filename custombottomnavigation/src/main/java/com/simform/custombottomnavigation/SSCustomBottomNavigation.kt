@@ -380,7 +380,7 @@ class SSCustomBottomNavigation : FrameLayout {
     private fun findStartDestination(graph: NavGraph): NavDestination {
         var startDestination: NavDestination = graph
         while (startDestination is NavGraph) {
-            startDestination = graph.findNode(graph.startDestination)!!
+            startDestination = graph.findNode(graph.startDestinationId)!!
         }
 
         return startDestination
