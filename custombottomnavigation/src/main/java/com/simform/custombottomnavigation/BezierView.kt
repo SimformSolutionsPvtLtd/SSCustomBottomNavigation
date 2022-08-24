@@ -28,6 +28,7 @@ class BezierView : View {
     private var bezierInnerWidth = 0f
     private var bezierInnerHeight = 0f
     private val shadowHeight = dipf(context, 35)   // this height will change bottomnavigation bg height
+    private val reverseCurveHeight = dipf(context, 10)   // this will change bottomnavigation bg height reverse
 
     var color = 0
         set(value) {
@@ -90,6 +91,11 @@ class BezierView : View {
                 }
             }
 
+    var isReverseCurve = false
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     @SuppressLint("NewApi")
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
@@ -203,12 +209,13 @@ class BezierView : View {
 
     private fun calculateInner() {
         val extra = shadowHeight
+        val pickHeight = if(isReverseCurve) (height - reverseCurveHeight) else (height - extra) / waveHeight
         innerArray[0] = PointF(0f, bezierInnerHeight + extra)
         innerArray[1] = PointF((bezierX - bezierInnerWidth / 2), bezierInnerHeight + extra)
         innerArray[2] = PointF(bezierX - bezierInnerWidth / 4, bezierInnerHeight + extra)
-        innerArray[3] = PointF(bezierX - bezierInnerWidth / 4, (height - extra) / waveHeight)
-        innerArray[4] = PointF(bezierX, (height - extra) / waveHeight)
-        innerArray[5] = PointF(bezierX + bezierInnerWidth / 4, (height - extra) / waveHeight)
+        innerArray[3] = PointF(bezierX - bezierInnerWidth / 4, pickHeight)
+        innerArray[4] = PointF(bezierX, pickHeight)
+        innerArray[5] = PointF(bezierX + bezierInnerWidth / 4, pickHeight)
         innerArray[6] = PointF(bezierX + bezierInnerWidth / 4, bezierInnerHeight + extra)
         innerArray[7] = PointF(bezierX + bezierInnerWidth / 2, bezierInnerHeight + extra)
         innerArray[8] = PointF(width, bezierInnerHeight + extra)

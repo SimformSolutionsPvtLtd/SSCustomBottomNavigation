@@ -29,6 +29,7 @@
         <attr name="ss_countTypeface" format="string" />
         <attr name="ss_rippleColor" format="color" />
         <attr name="ss_shadowColor" format="color" />
+        <attr name="ss_reverseCurve" format="boolean" />
     </declare-styleable>
 
 </resources>
