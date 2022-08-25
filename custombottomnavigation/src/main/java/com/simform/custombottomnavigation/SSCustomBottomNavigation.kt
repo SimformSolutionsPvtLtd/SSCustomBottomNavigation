@@ -127,6 +127,12 @@ class SSCustomBottomNavigation : FrameLayout {
             updateAllIfAllowDraw()
         }
 
+    var isReverseCurve = false
+        set(value) {
+            field = value
+            updateAllIfAllowDraw()
+        }
+
     fun setSelectedIndex(activeIndex: Int = 0) {
         selectedIndex = activeIndex
     }
@@ -206,6 +212,8 @@ class SSCustomBottomNavigation : FrameLayout {
                 ).toFloat()
                 waveHeight =
                     getInteger(R.styleable.SSCustomBottomNavigation_ss_waveHeight, waveHeight)
+
+                isReverseCurve = getBoolean(R.styleable.SSCustomBottomNavigation_ss_reverseCurve, isReverseCurve)
                 val iconTextTypeFace =
                     getString(R.styleable.SSCustomBottomNavigation_ss_iconTextTypeface)
                 if (iconTextTypeFace != null && iconTextTypeFace.isNotEmpty())
@@ -242,6 +250,7 @@ class SSCustomBottomNavigation : FrameLayout {
             layoutParams = LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (heightCell))
             color = backgroundBottomColor
             shadowColor = this@SSCustomBottomNavigation.shadowColor
+            isReverseCurve = this@SSCustomBottomNavigation.isReverseCurve
         }
         bezierView.waveHeight = waveHeight
 

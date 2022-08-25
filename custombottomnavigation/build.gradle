@@ -11,7 +11,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.simform.custombottomnavigation'
                 artifactId = 'custombottomnavigation'
-                version = '3.3'
+                version = '3.4'
             }
         }
     }

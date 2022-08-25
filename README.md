@@ -18,6 +18,10 @@ The actual features are:
 
 ![demo_data](https://github.com/simformsolutions/SSCustomBottomNavigation/blob/master/images/custom_bottom_navigation.gif)
 
+Reverse Curve
+
+![demo_data](https://github.com/simformsolutions/SSCustomBottomNavigation/blob/master/images/custom_bottom_navigation_revese.gif)
+
 
 ### Gradle Dependency
 * Add it in your root build.gradle at the end of repositories:
@@ -67,6 +71,7 @@ The actual features are:
 | `app:ss_countTypeface` | Set Font for Notification Badge | `none` |
 | `app:ss_rippleColor` | Set Ripple Color | `#757575` |
 | `app:ss_shadowColor` | Set Bottom Bar Shadow Color | `shadowColor` |
+| `app:ss_reverseCurve` | Set Reverse Bzier Curve | `false` |
 
 # Customization
 ------------------------
