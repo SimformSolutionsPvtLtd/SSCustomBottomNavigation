@@ -10,10 +10,12 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.LayoutDirection
 import android.util.Log
 import android.view.Gravity
+import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.annotation.IdRes
@@ -23,6 +25,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavGraph
 import androidx.navigation.NavOptions
+import com.google.android.material.internal.ContextUtils.getActivity
 import kotlin.math.abs
 
 internal typealias IBottomNavigationListener = (model: Model) -> Unit
@@ -216,17 +219,17 @@ class SSCustomBottomNavigation : FrameLayout {
                 isReverseCurve = getBoolean(R.styleable.SSCustomBottomNavigation_ss_reverseCurve, isReverseCurve)
                 val iconTextTypeFace =
                     getString(R.styleable.SSCustomBottomNavigation_ss_iconTextTypeface)
-                if (iconTextTypeFace != null && iconTextTypeFace.isNotEmpty())
+                if (TextUtils.isEmpty(iconTextTypeFace))
                     iconTextTypeface = Typeface.createFromAsset(context.assets, iconTextTypeFace)
 
                 val typeface = getString(R.styleable.SSCustomBottomNavigation_ss_countTypeface)
-                if (typeface != null && typeface.isNotEmpty())
+                if (TextUtils.isEmpty(typeface))
                     countTypeface = Typeface.createFromAsset(context.assets, typeface)
 
                 val drawable =
                     a.getDrawable(R.styleable.SSCustomBottomNavigation_ss_backgroundBottomDrawable)
-                if (drawable != null) {
-                    backgroundBottomDrawable = drawable
+                drawable?.let {
+                    backgroundBottomDrawable = it
                 }
             }
         } finally {
@@ -270,7 +273,8 @@ class SSCustomBottomNavigation : FrameLayout {
         }
         if (selectedIndex != -1) {
             Log.e("selectedIndex", " $selectedIndex")
-            show(selectedIndex, false)
+            val imm: InputMethodManager = getActivity(context)?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            if (!imm.isAcceptingText) show(selectedIndex, false)
         }
     }
 
@@ -378,7 +382,9 @@ class SSCustomBottomNavigation : FrameLayout {
     private fun matchDestination(destination: NavDestination, @IdRes destinationId: Int): Boolean {
         var currentDestination = destination
         while (currentDestination.id != destinationId && currentDestination.parent != null) {
-            currentDestination = currentDestination.parent!!
+            currentDestination.parent?.let {
+                currentDestination = it
+            }
         }
 
         return currentDestination.id == destinationId
@@ -389,7 +395,9 @@ class SSCustomBottomNavigation : FrameLayout {
     private fun findStartDestination(graph: NavGraph): NavDestination {
         var startDestination: NavDestination = graph
         while (startDestination is NavGraph) {
-            startDestination = graph.findNode(graph.startDestinationId)!!
+            graph.findNode(graph.startDestinationId)?.let {
+                startDestination = it
+            }
         }
 
         return startDestination
@@ -513,10 +521,10 @@ class SSCustomBottomNavigation : FrameLayout {
             val model = models[i]
             val cell = cells[i]
             if (model.id == id) {
-                anim(cell, id, enableAnimation)
-                cell.enableCell()
                 onShowListener(model)
                 menuItemClickListener?.invoke(cbnMenuItems[i], i)
+                anim(cell, id, enableAnimation)
+                cell.enableCell()
             } else {
                 cell.disableCell()
             }
