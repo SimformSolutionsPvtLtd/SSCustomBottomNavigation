@@ -146,7 +146,9 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
         set(value) {
             field = value
             if (allowDraw && field != null)
-                tv_count.typeface = field
+                field?.let {
+                    tv_count.typeface = it
+                }
         }
 
     var rippleColor = 0
@@ -170,18 +172,6 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
             val scale = (1f - progress) * (-0.2f) + 1f
             iv.scaleX = scale
             iv.scaleY = scale
-
-            /*val d = GradientDrawable()
-            d.setColor(circleColor)
-            d.shape = GradientDrawable.OVAL
-
-            ViewCompat.setBackground(v_circle, d)
-
-            ViewCompat.setElevation(v_circle, if (progress > 0.7f) dipf(context, progress * 4f) else 0f)
-
-            val m = dip(context, 24)
-            v_circle.x = (1f - progress) * (if (isFromLeft) -m else m) + ((measuredWidth - dip(context, 48)) / 2f)
-            v_circle.y = (1f - progress) * measuredHeight + dip(context, 6)*/
         }
 
     var isEnabledCell = false
