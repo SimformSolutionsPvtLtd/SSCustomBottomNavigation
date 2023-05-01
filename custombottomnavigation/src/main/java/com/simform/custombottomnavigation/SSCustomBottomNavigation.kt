@@ -219,11 +219,11 @@ class SSCustomBottomNavigation : FrameLayout {
                 isReverseCurve = getBoolean(R.styleable.SSCustomBottomNavigation_ss_reverseCurve, isReverseCurve)
                 val iconTextTypeFace =
                     getString(R.styleable.SSCustomBottomNavigation_ss_iconTextTypeface)
-                if (TextUtils.isEmpty(iconTextTypeFace))
+                if (!iconTextTypeFace.isNullOrEmpty())
                     iconTextTypeface = Typeface.createFromAsset(context.assets, iconTextTypeFace)
 
                 val typeface = getString(R.styleable.SSCustomBottomNavigation_ss_countTypeface)
-                if (TextUtils.isEmpty(typeface))
+                if (!typeface.isNullOrEmpty())
                     countTypeface = Typeface.createFromAsset(context.assets, typeface)
 
                 val drawable =

@@ -49,7 +49,7 @@ Reverse Curve
 
 	```
 	dependencies {
-		implementation 'com.github.simformsolutions:SSCustomBottomNavigation:3.5'
+		implementation 'com.github.simformsolutions:SSCustomBottomNavigation:3.6'
 	}
 	```
 
