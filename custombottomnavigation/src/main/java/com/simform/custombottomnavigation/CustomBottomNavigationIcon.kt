@@ -16,27 +16,28 @@ import android.view.View
 import android.widget.RelativeLayout
 import androidx.core.view.ViewCompat
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
-import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.custom_bottom_navigation_icon.view.*
+import com.simform.custombottomnavigation.databinding.CustomBottomNavigationIconBinding
 
 @Suppress("unused")
-class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
+class CustomBottomNavigationIcon : RelativeLayout {
 
     companion object {
         const val EMPTY_VALUE = "empty"
     }
 
+    private lateinit var binding: CustomBottomNavigationIconBinding
+
     var defaultIconColor = 0
         set(value) {
             field = value
             if (allowDraw)
-                iv.color = if (!isEnabledCell) defaultIconColor else selectedIconColor
+                binding.iv.color = if (!isEnabledCell) defaultIconColor else selectedIconColor
         }
     var selectedIconColor = Color.parseColor("#00C957")
         set(value) {
             field = value
             if (allowDraw)
-                iv.color = if (isEnabledCell) selectedIconColor else defaultIconColor
+                binding.iv.color = if (isEnabledCell) selectedIconColor else defaultIconColor
         }
     var circleColor = 0
         set(value) {
@@ -49,21 +50,21 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
         set(value) {
             field = value
             if (allowDraw)
-                iv.resource = value
+                binding.iv.resource = value
         }
 
     var iconText = ""
         set(value) {
             field = value
             if (allowDraw)
-                tv.text = value
+                binding.tv.text = value
         }
 
     var iconTextColor = 0
         set(value) {
             field = value
             if (allowDraw) {
-                if (!isEnabledCell) tv.setTextColor(iconTextColor) else tv.setTextColor(
+                if (!isEnabledCell) binding.tv.setTextColor(iconTextColor) else binding.tv.setTextColor(
                     selectedIconTextColor
                 )
 
@@ -74,7 +75,7 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
         set(value) {
             field = value
             if (allowDraw)
-                if (isEnabledCell) tv.setTextColor(selectedIconTextColor) else tv.setTextColor(
+                if (isEnabledCell) binding.tv.setTextColor(selectedIconTextColor) else binding.tv.setTextColor(
                     iconTextColor
                 )
         }
@@ -83,14 +84,14 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
         set(value) {
             field = value
             if (allowDraw && field != null)
-                tv.typeface = field
+                binding.tv.typeface = field
         }
 
     var iconTextSize = 10f
         set(value) {
             field = value
             if (allowDraw) {
-                tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, field)
+                binding.tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, field)
             }
         }
 
@@ -99,17 +100,17 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
             field = value
             if (allowDraw) {
                 if (count != null && count == EMPTY_VALUE) {
-                    tv_count.text = ""
-                    tv_count.visibility = View.INVISIBLE
+                    binding.tvCount.text = ""
+                    binding.tvCount.visibility = View.INVISIBLE
                 } else {
                     if (count != null && count?.length ?: 0 >= 3) {
                         field = count?.substring(0, 1) + ".."
                     }
-                    tv_count.text = count
-                    tv_count.visibility = View.VISIBLE
+                    binding.tvCount.text = count
+                    binding.tvCount.visibility = View.VISIBLE
                     val scale = if (count?.isEmpty() == true) 0.5f else 1f
-                    tv_count.scaleX = scale
-                    tv_count.scaleY = scale
+                    binding.tvCount.scaleX = scale
+                    binding.tvCount.scaleY = scale
                 }
             }
         }
@@ -118,9 +119,9 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
         set(value) {
             field = value
             if (allowDraw) {
-                iv.size = value
-                iv.pivotX = iconSize / 2f
-                iv.pivotY = iconSize / 2f
+                binding.iv.size = value
+                binding.iv.pivotX = iconSize / 2f
+                binding.iv.pivotY = iconSize / 2f
             }
         }
 
@@ -128,7 +129,7 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
         set(value) {
             field = value
             if (allowDraw)
-                tv_count.setTextColor(field)
+                binding.tvCount.setTextColor(field)
         }
 
     var countBackgroundColor = 0
@@ -138,7 +139,7 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
                 val d = GradientDrawable()
                 d.setColor(field)
                 d.shape = GradientDrawable.OVAL
-                ViewCompat.setBackground(tv_count, d)
+                ViewCompat.setBackground(binding.tvCount, d)
             }
         }
 
@@ -147,7 +148,7 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
             field = value
             if (allowDraw && field != null)
                 field?.let {
-                    tv_count.typeface = it
+                    binding.tvCount.typeface = it
                 }
         }
 
@@ -164,14 +165,14 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
     private var progress = 0f
         set(value) {
             field = value
-            Log.e("TAG", "height is ${containerView.layoutParams.height} ${dip(context, 18)}")
-            fl.y = (1f - progress) * dip(context, 18) + dip(context, -2)
+            Log.e("TAG", "height is ${binding.root.layoutParams.height} ${dip(context, 18)}")
+            binding.fl.y = (1f - progress) * dip(context, 18) + dip(context, -2)
 
-            iv.color = if (progress == 1f) selectedIconColor else iconTextColor
-            tv.setTextColor(if (progress == 1f) selectedIconTextColor else defaultIconColor)
+            binding.iv.color = if (progress == 1f) selectedIconColor else iconTextColor
+            binding.tv.setTextColor(if (progress == 1f) selectedIconTextColor else defaultIconColor)
             val scale = (1f - progress) * (-0.2f) + 1f
-            iv.scaleX = scale
-            iv.scaleY = scale
+            binding.iv.scaleX = scale
+            binding.iv.scaleY = scale
         }
 
     var isEnabledCell = false
@@ -181,10 +182,10 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
             d.setColor(circleColor)
             d.shape = GradientDrawable.OVAL
             if (Build.VERSION.SDK_INT >= 21 && !isEnabledCell) {
-                fl.background = RippleDrawable(ColorStateList.valueOf(rippleColor), null, d)
+                binding.fl.background = RippleDrawable(ColorStateList.valueOf(rippleColor), null, d)
             } else {
-                fl.runAfterDelay(200) {
-                    fl.setBackgroundColor(Color.TRANSPARENT)
+                binding.fl.runAfterDelay(200) {
+                    binding.fl.setBackgroundColor(Color.TRANSPARENT)
                 }
             }
         }
@@ -192,12 +193,11 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
     var onClickListener: () -> Unit = {}
         set(value) {
             field = value
-            fl?.setOnClickListener {
+            binding.fl.setOnClickListener {
                 onClickListener()
             }
         }
 
-    override lateinit var containerView: View
     private var allowDraw = false
 
     constructor(context: Context) : super(context) {
@@ -224,8 +224,7 @@ class CustomBottomNavigationIcon : RelativeLayout, LayoutContainer {
 
     private fun initializeView() {
         allowDraw = true
-        containerView =
-            LayoutInflater.from(context).inflate(R.layout.custom_bottom_navigation_icon, this)
+        binding = CustomBottomNavigationIconBinding.inflate(LayoutInflater.from(context), this)
         draw()
     }
 

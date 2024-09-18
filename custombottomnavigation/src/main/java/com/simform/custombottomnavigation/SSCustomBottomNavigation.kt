@@ -362,10 +362,10 @@ class SSCustomBottomNavigation : FrameLayout {
         }
         val builder = NavOptions.Builder()
             .setLaunchSingleTop(true)
-            .setEnterAnim(R.anim.nav_default_enter_anim)
-            .setExitAnim(R.anim.nav_default_exit_anim)
-            .setPopEnterAnim(R.anim.nav_default_pop_enter_anim)
-            .setPopExitAnim(R.anim.nav_default_pop_exit_anim)
+            .setEnterAnim(android.R.anim.fade_in)
+            .setExitAnim(android.R.anim.fade_out)
+            .setPopEnterAnim(android.R.anim.fade_in)
+            .setPopExitAnim(android.R.anim.fade_out)
         // pop to the navigation graph's start  destination
         builder.setPopUpTo(findStartDestination(navController.graph).id, false)
         val options = builder.build()
@@ -490,7 +490,7 @@ class SSCustomBottomNavigation : FrameLayout {
                     isAnimating = false
             }
             addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     isAnimating = false
                 }
             })
