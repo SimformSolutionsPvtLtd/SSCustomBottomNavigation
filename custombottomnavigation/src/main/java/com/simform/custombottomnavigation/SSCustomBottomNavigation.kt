@@ -311,7 +311,7 @@ class SSCustomBottomNavigation : FrameLayout {
     }
 
     // function to setup with navigation controller just like in BottomNavigationView
-    fun setupWithNavController(navController: NavController) {
+    fun setupWithNavController(navController: NavController, exitOnBack: Boolean = false) {
         // check for menu initialization
         if (!isMenuInitialized) {
             throw RuntimeException("initialize menu by calling setMenuItems() before setting up with NavController")
@@ -319,10 +319,10 @@ class SSCustomBottomNavigation : FrameLayout {
 
         // initialize the menu
         setOnMenuItemClickListener { item, _ ->
-            navigateToDestination(navController, item)
+            navigateToDestination(navController, item, exitOnBack)
         }
         // setup destination change listener to properly sync the back button press
-        navController.addOnDestinationChangedListener { _, destination, _ ->
+        navController.addOnDestinationChangedListener { controller, destination, _ ->
             for (i in cbnMenuItems.indices) {
                 if (matchDestination(destination, cbnMenuItems[i].destinationId)) {
                     if (selectedIndex != i && isAnimating) {
@@ -331,6 +331,7 @@ class SSCustomBottomNavigation : FrameLayout {
                         animatorSet.cancel()
                         isAnimating = false
                     }
+                    show(id = cbnMenuItems[i].id, isMenuClicked = false)
                 }
             }
         }
@@ -356,7 +357,7 @@ class SSCustomBottomNavigation : FrameLayout {
 
     // source code referenced from the actual JetPack Navigation Component
     // refer to the original source code
-    private fun navigateToDestination(navController: NavController, itemCbn: Model) {
+    private fun navigateToDestination(navController: NavController, itemCbn: Model, exitOnBack: Boolean) {
         if (itemCbn.destinationId == -1) {
             throw RuntimeException("please set a valid id, unable the navigation!")
         }
@@ -366,11 +367,14 @@ class SSCustomBottomNavigation : FrameLayout {
             .setExitAnim(android.R.anim.fade_out)
             .setPopEnterAnim(android.R.anim.fade_in)
             .setPopExitAnim(android.R.anim.fade_out)
-        // pop to the navigation graph's start  destination
-        builder.setPopUpTo(findStartDestination(navController.graph).id, false)
+        // pop to the navigation graph's start destination
+        val startDestination = findStartDestination(navController.graph)
+        if (itemCbn.destinationId == startDestination.id)
+            builder.setPopUpTo(startDestination.id, false)
         val options = builder.build()
         try {
-            navController.popBackStack()
+            if (exitOnBack)
+                navController.popBackStack()
             navController.navigate(itemCbn.destinationId, null, options)
         } catch (e: IllegalArgumentException) {
             Log.w("TAG", "unable to navigate!", e)
@@ -516,13 +520,14 @@ class SSCustomBottomNavigation : FrameLayout {
         }
     }
 
-    fun show(id: Int, enableAnimation: Boolean = true) {
+    fun show(id: Int, enableAnimation: Boolean = true, isMenuClicked: Boolean = true) {
         for (i in models.indices) {
             val model = models[i]
             val cell = cells[i]
             if (model.id == id) {
                 onShowListener(model)
-                menuItemClickListener?.invoke(cbnMenuItems[i], i)
+                if (isMenuClicked)
+                    menuItemClickListener?.invoke(cbnMenuItems[i], i)
                 anim(cell, id, enableAnimation)
                 cell.enableCell()
             } else {
