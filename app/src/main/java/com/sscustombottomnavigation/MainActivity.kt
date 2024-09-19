@@ -195,7 +195,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.apply {
             // If you don't pass activeIndex then by default it will take 0 position
             setMenuItems(menuItems, activeIndex)
-            setupWithNavController(navController)
+            setupWithNavController(navController = navController, exitOnBack = false)
 
             // manually set the active item, so from which you can control which position item should be active when it is initialized.
             // onMenuItemClick(4)
