@@ -11,7 +11,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.simform.custombottomnavigation.Model
 import com.sscustombottomnavigation.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+/**
+ * Kotlin Example for Custom Bottom Navigation
+ */
+class KotlinActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -21,21 +24,24 @@ class MainActivity : AppCompatActivity() {
         private const val ID_MESSAGE = 2
         private const val ID_NOTIFICATION = 3
         private const val ID_ACCOUNT = 4
+        private const val KEY_ACTIVE_INDEX = "activeIndex"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        // Uncomment to use the bottom navigation in traditional way, such as without using Navigation Component
         //setBottomNavigationInNormalWay(savedInstanceState)
         setBottomNavigationWithNavController(savedInstanceState)
     }
 
     private fun setBottomNavigationInNormalWay(savedInstanceState: Bundle?) {
         val tvSelected = binding.tvSelected
-        //tvSelected.typeface = Typeface.createFromAsset(assets, "fonts/SourceSansPro-Regular.ttf")
+        // Uncomment to set the typeface of text
+        // tvSelected.typeface = Typeface.createFromAsset(assets, "fonts/SourceSansPro-Regular.ttf")
 
-        val activeIndex = savedInstanceState?.getInt("activeIndex") ?: 2
+        val activeIndex = savedInstanceState?.getInt(KEY_ACTIVE_INDEX) ?: ID_MESSAGE
 
         binding.bottomNavigation.apply {
 
@@ -97,21 +103,24 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 val bgColor = when (it.id) {
-                    ID_HOME -> ContextCompat.getColor(this@MainActivity, R.color.color_home_bg)
+                    ID_HOME -> ContextCompat.getColor(this@KotlinActivity, R.color.color_home_bg)
                     ID_EXPLORE -> ContextCompat.getColor(
-                        this@MainActivity,
+                        this@KotlinActivity,
                         R.color.color_favorite_bg
                     )
-                    ID_MESSAGE -> ContextCompat.getColor(this@MainActivity, R.color.color_chat_bg)
+
+                    ID_MESSAGE -> ContextCompat.getColor(this@KotlinActivity, R.color.color_chat_bg)
                     ID_NOTIFICATION -> ContextCompat.getColor(
-                        this@MainActivity,
+                        this@KotlinActivity,
                         R.color.color_notification_bg
                     )
+
                     ID_ACCOUNT -> ContextCompat.getColor(
-                        this@MainActivity,
+                        this@KotlinActivity,
                         R.color.color_profile_bg
                     )
-                    else -> ContextCompat.getColor(this@MainActivity, R.color.colorPrimary)
+
+                    else -> ContextCompat.getColor(this@KotlinActivity, R.color.colorPrimary)
                 }
 
                 tvSelected.text = getString(R.string.main_page_selected, name)
@@ -139,7 +148,7 @@ class MainActivity : AppCompatActivity() {
     private fun setBottomNavigationWithNavController(savedInstanceState: Bundle?) {
 
         // If you don't pass activeIndex then by default it will take 0 position
-        val activeIndex = savedInstanceState?.getInt("activeIndex") ?: 2
+        val activeIndex = savedInstanceState?.getInt("activeIndex") ?: ID_MESSAGE
 
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
@@ -158,35 +167,35 @@ class MainActivity : AppCompatActivity() {
             Model(
                 icon = R.drawable.ic_home,
                 destinationId = R.id.navigation_home,
-                id = 0,
+                id = ID_HOME,
                 text = R.string.title_home,
                 count = R.string.empty_value
             ),
             Model(
                 R.drawable.ic_favorite_border_black,
                 R.id.navigation_favorite,
-                id = 1,
+                id = ID_EXPLORE,
                 R.string.title_favorite,
                 R.string.empty_value
             ),
             Model(
                 R.drawable.ic_message,
                 R.id.navigation_chat,
-                2,
+                ID_MESSAGE,
                 R.string.title_chat,
                 R.string.empty_value
             ),
             Model(
                 R.drawable.ic_notification,
                 R.id.navigation_notifications,
-                3,
+                ID_NOTIFICATION,
                 R.string.title_notifications,
                 R.string.count
             ),
             Model(
                 R.drawable.ic_account,
                 R.id.navigation_profile,
-                4,
+                ID_ACCOUNT,
                 R.string.title_profile,
                 R.string.empty_value
             )
@@ -207,7 +216,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt("activeIndex", binding.bottomNavigation.getSelectedIndex())
+        outState.putInt(KEY_ACTIVE_INDEX, binding.bottomNavigation.getSelectedIndex())
         super.onSaveInstanceState(outState)
     }
 }
