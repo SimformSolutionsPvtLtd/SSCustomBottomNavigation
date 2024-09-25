@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--  Kotlin Example  -->
         <activity
-            android:name="com.sscustombottomnavigation.MainActivity"
+            android:name="com.sscustombottomnavigation.KotlinActivity"
             android:screenOrientation="fullSensor"
             android:exported="true">
             <intent-filter>
@@ -19,6 +20,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+            <!--  Uncomment it to review Java implementation  -->
+<!--        <activity-->
+<!--            android:name="com.sscustombottomnavigation.JavaActivity"-->
+<!--            android:screenOrientation="fullSensor"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
     </application>
 
 </manifest>
