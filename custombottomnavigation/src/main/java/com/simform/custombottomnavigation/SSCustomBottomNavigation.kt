@@ -10,12 +10,10 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
-import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.LayoutDirection
 import android.util.Log
 import android.view.Gravity
-import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.annotation.IdRes
@@ -25,7 +23,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavGraph
 import androidx.navigation.NavOptions
-import com.google.android.material.internal.ContextUtils.getActivity
 import kotlin.math.abs
 
 internal typealias IBottomNavigationListener = (model: Model) -> Unit
@@ -273,8 +270,9 @@ class SSCustomBottomNavigation : FrameLayout {
         }
         if (selectedIndex != -1) {
             Log.e("selectedIndex", " $selectedIndex")
-            val imm: InputMethodManager = getActivity(context)?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            if (!imm.isAcceptingText) show(selectedIndex, false)
+            // Directly position the bezier indicator to the center of selected tab
+            // This fixes fragment recreation issues without triggering animations or callbacks
+            bezierView.bezierX = cells[getModelPosition(selectedIndex)].x + (cells[getModelPosition(selectedIndex)].measuredWidth / 2)
         }
     }
 
