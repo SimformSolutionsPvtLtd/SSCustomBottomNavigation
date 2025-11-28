@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 
-data class Model(
+data class Model @JvmOverloads constructor(
     @DrawableRes
     val icon: Int = 0,
     @IdRes
